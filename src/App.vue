@@ -1,7 +1,15 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld />
+  <div>
+    <Tareas />
+  </div>
 </template>
+
+<script>
+import Tareas from './components/Tareas.vue'
+
+export default {
+  components: {
+    Tareas
+  }
+}
+</script>
