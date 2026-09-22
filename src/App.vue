@@ -1,7 +1,15 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld />
+  <div>
+    <Contacto />
+  </div>
 </template>
+
+<script>
+import Contacto from './components/Contacto.vue'
+
+export default {
+  components: {
+    Contacto
+  }
+}
+</script>
