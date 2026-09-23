@@ -82,3 +82,19 @@ Antes de procesar la solicitud se valida que los campos obligatorios estén comp
 Cuando los datos son válidos, se presenta una confirmación junto con un resumen de la información ingresada.
 
 El formulario también se relaciona con el catálogo de servicios. Cuando el usuario selecciona un servicio mediante el botón "Solicitar información", la selección se almacena temporalmente y puede utilizarse automáticamente como servicio de interés en la vista Contacto.
+
+### Parte 6 – Diseño y revisión final
+
+Se aplicó una identidad visual común a todas las vistas de TechNova Servicios Informáticos.
+
+El diseño utiliza una combinación de colores azul, blanco y tonos claros, buscando representar una empresa relacionada con tecnología y servicios informáticos.
+
+Se mejoró la presentación de la navegación, contenido general, catálogo de servicios, tarjetas, filtros, botones y formulario de contacto.
+
+El catálogo utiliza una distribución adaptable que permite mostrar tres tarjetas por fila en pantallas grandes, dos en tamaños intermedios y una en dispositivos pequeños.
+
+También se incorporaron ajustes responsive para la navegación, los filtros y el contenido general.
+
+Durante la revisión final se probaron las rutas Inicio, Nosotros, Servicios y Contacto, además de la búsqueda, filtros, selección de servicios, validaciones y confirmación del formulario.
+
+Finalmente, se verificó el funcionamiento general de la aplicación y se revisó la consola del navegador para detectar posibles errores.
