@@ -39,3 +39,29 @@ Actividad 7 -Diagnostico Inicial
 **Archivo:** `src/components/ItemsRecepcion.vue`
 
 **Posible causa:** Las propiedades del nuevo ítem (`id`, `id_recepcion`, `id_libro`, `cantidad`, etc.) se encuentran declaradas sin estar contenidas dentro de un objeto ni agregadas correctamente al arreglo de ítems, provocando un error de sintaxis.
+
+## Actividad 8
+
+### Parte 1 – Reutilización del proyecto
+
+Para esta actividad se reutilizó como base el proyecto desarrollado en la Actividad 7, adaptándolo a una empresa de servicios tecnológicos.
+
+**Nombre de la empresa:** TechNova Servicios Informáticos
+
+**Rubro:** Servicios tecnológicos y soporte informático.
+
+TechNova Servicios Informáticos es una empresa orientada a entregar soluciones tecnológicas a personas y pequeñas empresas, ofreciendo servicios de soporte, mantenimiento, instalación, configuración y asesoría informática.
+
+### Elementos reutilizados de la Actividad 7
+
+Se conserva la estructura general del proyecto Vue 3, incluyendo la carpeta de componentes, la configuración principal de la aplicación y los conceptos trabajados anteriormente, como componentes, props, emit, v-model, v-for, condicionales y propiedades calculadas.
+
+### Elementos que serán modificados
+
+Los componentes relacionados con libros, proveedores y recepción de textos escolares serán modificados o reemplazados, ya que no corresponden al nuevo contexto de una empresa de servicios.
+
+El proyecto será adaptado para incorporar las vistas Inicio, Nosotros, Servicios y Contacto, además de un catálogo dinámico de servicios y un formulario para solicitar información.
+
+### Motivo de la adaptación
+
+La reutilización permite aprovechar la estructura y los conocimientos aplicados anteriormente, adaptándolos a un nuevo caso de uso sin comenzar completamente desde cero.
