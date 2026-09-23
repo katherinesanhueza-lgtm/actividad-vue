@@ -5,59 +5,65 @@ import ItemsRecepcion from './ItemsRecepcion.vue'
 
 const { state } = useRecepcionStore()
 
-const form = ref({ fecha: '', nro_guia: '', id_proveedor: '' })
+const form = ref({
+  fecha: '',
+  nro_guia: '',
+  id_proveedor: ''
+})
+
 const seleccion = ref(null)
 
-function guardar(){
-  
-  if(!form.value.id_proveedor){
+function guardar() {
+  if (!form.value.id_proveedor) {
     alert('Seleccione proveedor')
-   
+    return
   }
-  state.recepciones.push({ id: Date.now(), ...form.value })
-  seleccion.value = state.recepciones[state.recepciones.length-1]?.id || null
-  form.value = { fecha: '', nro_guia: '', id_proveedor: '' }
+
+  state.recepciones.push({
+    id: Date.now(),
+    ...form.value
+  })
+
+  seleccion.value =
+    state.recepciones[state.recepciones.length - 1]?.id || null
+
+  form.value = {
+    fecha: '',
+    nro_guia: '',
+    id_proveedor: ''
+  }
 }
 
 const lista = computed(() => state?.recepciones || [])
 
+function totalLibros(idRecepcion) {
+  return (state?.items || [])
+    .filter(item => item.id_recepcion === idRecepcion)
+    .reduce((total, item) => total + Number(item.cantidad), 0)
+}
+
+function porcentajeDefectuosos(idRecepcion) {
+  const items = (state?.items || [])
+    .filter(item => item.id_recepcion === idRecepcion)
+
+  const total = items.reduce(
+    (suma, item) => suma + Number(item.cantidad),
+    0
+  )
+
+  if (total === 0) {
+    return 0
+  }
+
+  const defectuosos = items
+    .filter(item =>
+      item.estado === 'dañado' || item.estado === 'mixto'
+    )
+    .reduce(
+      (suma, item) => suma + Number(item.cantidad),
+      0
+    )
+
+  return ((defectuosos / total) * 100).toFixed(1)
+}
 </script>
-
-<template>
-  <div>
-    <h2>Recepciones</h2>
-
-    <form @submit.prevent="guardar">
-      <input type="date" v-model="form.fecha" />
-      <input v-model="form.nro_guia" placeholder="N° Guía/Factura" />
-      <select v-model="form.id_proveedor">
-        <option value="">-- Proveedor --</option>
-        <option v-for="p in state?.proveedores || []" :key="p.id" :value="p.id">{{ p.nombre }}</option>
-      </select>
-      <button type="submit">Agregar</button>
-    </form>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th><th>Fecha</th><th>Proveedor</th><th>N° Guía</th><th>Total</th><th>% Def.</th><th>Detalle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="r in lista" :key="r.id">
-          <td>{{ r.id }}</td>
-          <td>{{ r.fecha }}</td>
-          <td>{{ (state?.proveedores || []).find(p => p.id === r.id_proveedor)?.nombre || '—' }}</td>
-          <td>{{ r.nro_guia }}</td>
-           <td>{{ 0 }}</td>              
-          <td>{{ NaN }}%</td>           
-          <td>
-            <button @click="seleccion = r.id">Ver</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ItemsRecepcion :id-recepcion="seleccion" /> 
-  </div>
-</template>
