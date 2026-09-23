@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import TarjetaServicio from '../components/TarjetaServicio.vue'
 
 const servicios = ref([
@@ -52,6 +52,34 @@ const servicios = ref([
     disponible: true
   }
 ])
+
+const busqueda = ref('')
+const categoriaSeleccionada = ref('')
+const servicioSeleccionado = ref(null)
+
+const categorias = computed(() => {
+  return [...new Set(
+    servicios.value.map(servicio => servicio.categoria)
+  )]
+})
+
+const serviciosFiltrados = computed(() => {
+  return servicios.value.filter(servicio => {
+    const coincideNombre = servicio.nombre
+      .toLowerCase()
+      .includes(busqueda.value.toLowerCase())
+
+    const coincideCategoria =
+      categoriaSeleccionada.value === '' ||
+      servicio.categoria === categoriaSeleccionada.value
+
+    return coincideNombre && coincideCategoria
+  })
+})
+
+function seleccionarServicio(servicio) {
+  servicioSeleccionado.value = servicio
+}
 </script>
 
 <template>
@@ -63,12 +91,53 @@ const servicios = ref([
       para sus clientes.
     </p>
 
-    <div class="catalogo-servicios">
+    <section class="filtros">
+      <input
+        v-model="busqueda"
+        type="text"
+        placeholder="Buscar servicio por nombre"
+      />
+
+      <select v-model="categoriaSeleccionada">
+        <option value="">
+          Todas las categorías
+        </option>
+
+        <option
+          v-for="categoria in categorias"
+          :key="categoria"
+          :value="categoria"
+        >
+          {{ categoria }}
+        </option>
+      </select>
+    </section>
+
+    <section v-if="servicioSeleccionado">
+      <h2>Servicio seleccionado</h2>
+
+      <p>
+        Has seleccionado:
+        <strong>
+          {{ servicioSeleccionado.nombre }}
+        </strong>
+      </p>
+    </section>
+
+    <div
+      v-if="serviciosFiltrados.length > 0"
+      class="catalogo-servicios"
+    >
       <TarjetaServicio
-        v-for="servicio in servicios"
+        v-for="servicio in serviciosFiltrados"
         :key="servicio.id"
         :servicio="servicio"
+        @seleccionar="seleccionarServicio"
       />
     </div>
+
+    <p v-else>
+      No se encontraron servicios que coincidan con la búsqueda.
+    </p>
   </main>
 </template>

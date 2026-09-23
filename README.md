@@ -56,3 +56,17 @@ Cada servicio se almacena dentro de una estructura de datos y contiene la siguie
 - Descripción
 - Precio referencial
 - Disponibilidad
+
+### Parte 4 – Filtros, condicionales e interacción
+
+Se incorporó una herramienta de búsqueda y filtrado para facilitar la localización de los servicios ofrecidos por TechNova Servicios Informáticos.
+
+La búsqueda permite localizar servicios por nombre y también se agregó un filtro por categoría. Ambos controles utilizan v-model.
+
+Los servicios que se muestran se obtienen mediante una propiedad computed llamada `serviciosFiltrados`, por lo que el arreglo original de servicios no se modifica.
+
+Se utilizaron condicionales con v-if y v-else para mostrar la disponibilidad de los servicios, controlar el botón de solicitud y mostrar un mensaje cuando una búsqueda no encuentra resultados.
+
+Cada servicio disponible incorpora el botón "Solicitar información". Esta acción se origina en el componente hijo `TarjetaServicio.vue` y se comunica mediante emit al componente padre `ServiciosView.vue`.
+
+El servicio seleccionado queda almacenado y visible para el usuario.

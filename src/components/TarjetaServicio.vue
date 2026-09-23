@@ -5,6 +5,12 @@ defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['seleccionar'])
+
+function seleccionarServicio(servicio) {
+  emit('seleccionar', servicio)
+}
 </script>
 
 <template>
@@ -16,9 +22,7 @@ defineProps({
       {{ servicio.categoria }}
     </p>
 
-    <p>
-      {{ servicio.descripcion }}
-    </p>
+    <p>{{ servicio.descripcion }}</p>
 
     <p>
       <strong>Precio referencial:</strong>
@@ -27,7 +31,15 @@ defineProps({
 
     <p>
       <strong>Disponibilidad:</strong>
-      {{ servicio.disponible ? 'Disponible' : 'No disponible' }}
+      <span v-if="servicio.disponible">Disponible</span>
+      <span v-else>No disponible</span>
     </p>
+
+    <button
+      v-if="servicio.disponible"
+      @click="seleccionarServicio(servicio)"
+    >
+      Solicitar información
+    </button>
   </article>
 </template>
