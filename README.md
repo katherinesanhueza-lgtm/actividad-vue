@@ -44,3 +44,15 @@ Las rutas implementadas son:
 - `/contacto` → Contacto
 
 De esta manera, la aplicación funciona como una SPA (Single Page Application), permitiendo cambiar entre las vistas sin realizar una recarga completa de la página.
+
+### Parte 3 – Catálogo de servicios y componentes
+
+Se creó un catálogo dinámico compuesto por seis servicios relacionados con el rubro tecnológico de TechNova Servicios Informáticos.
+
+Cada servicio se almacena dentro de una estructura de datos y contiene la siguiente información:
+
+- Nombre del servicio
+- Categoría
+- Descripción
+- Precio referencial
+- Disponibilidad
