@@ -1,46 +1,4 @@
-Actividad 7 -Diagnostico Inicial
 
-### 1. Problema detectado: error de sintaxis que impide iniciar la aplicación
-
-**Archivo:** `src/components/Recepciones.vue`
-
-**Posible causa:** Existe un carácter `/` aislado en el código. Vite lo interpreta como el inicio de una expresión regular sin terminar, generando el error `Unterminated regular expression`.
-### 2. Problema detectado: error en la navegación hacia Libros
-
-**Archivo:** `src/App.vue`
-
-**Posible causa:** Existe una inconsistencia entre el nombre del componente importado y el nombre utilizado en el template, lo que impide visualizar correctamente la sección de libros.
-
-### 3. Problema detectado: error en la pestaña Recepciones
-
-**Archivo:** `src/App.vue`
-
-**Posible causa:** El nombre utilizado para comprobar la sección activa no coincide con el valor utilizado para identificar la sección Recepciones.
-
-### 4. Problema detectado: estado compartido no disponible correctamente
-
-**Archivo:** `src/stores/useRecepcionStore.js`
-
-**Posible causa:** Los componentes necesitan acceder al estado compartido, pero la función del store no lo retorna correctamente.
-
-### 5. Problema detectado: validación incorrecta del ISBN
-
-**Archivo:** `src/components/Libros.vue`
-
-**Posible causa:** La condición utilizada para validar el ISBN no comprueba correctamente que tenga exactamente 10 o 13 caracteres.
-### 6. Problema detectado: archivo CSS no encontrado
-
-**Archivo:** `src/main.js`
-
-**Posible causa:** Se intenta importar `./styles.css`, pero el archivo existente se llama `style.css`, provocando un error de resolución de importación.
-
-### 8. Problema detectado: error de sintaxis al agregar ítems
-
-**Archivo:** `src/components/ItemsRecepcion.vue`
-
-**Posible causa:** Las propiedades del nuevo ítem (`id`, `id_recepcion`, `id_libro`, `cantidad`, etc.) se encuentran declaradas sin estar contenidas dentro de un objeto ni agregadas correctamente al arreglo de ítems, provocando un error de sintaxis.
-
-## Actividad 8
 
 ### Parte 1 – Reutilización del proyecto
 
@@ -65,3 +23,24 @@ El proyecto será adaptado para incorporar las vistas Inicio, Nosotros, Servicio
 ### Motivo de la adaptación
 
 La reutilización permite aprovechar la estructura y los conocimientos aplicados anteriormente, adaptándolos a un nuevo caso de uso sin comenzar completamente desde cero.
+### Parte 2 – Navegación y vistas
+
+Se implementó Vue Router para permitir la navegación entre las distintas secciones de TechNova Servicios Informáticos sin necesidad de recargar completamente la página.
+
+La aplicación cuenta con las siguientes vistas:
+
+- **Inicio:** presenta brevemente la empresa y los servicios tecnológicos que ofrece.
+- **Nosotros:** describe la actividad de TechNova y su propósito.
+- **Servicios:** sección destinada a mostrar el catálogo de servicios de la empresa.
+- **Contacto:** sección destinada a permitir que los clientes soliciten información.
+
+La navegación se realiza mediante RouterLink y el contenido correspondiente a cada ruta se muestra mediante RouterView.
+
+Las rutas implementadas son:
+
+- `/` → Inicio
+- `/nosotros` → Nosotros
+- `/servicios` → Servicios
+- `/contacto` → Contacto
+
+De esta manera, la aplicación funciona como una SPA (Single Page Application), permitiendo cambiar entre las vistas sin realizar una recarga completa de la página.
