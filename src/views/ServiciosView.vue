@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import TarjetaServicio from '../components/TarjetaServicio.vue'
+
+const router = useRouter()
 
 const servicios = ref([
   {
@@ -79,6 +82,15 @@ const serviciosFiltrados = computed(() => {
 
 function seleccionarServicio(servicio) {
   servicioSeleccionado.value = servicio
+
+  sessionStorage.setItem(
+    'servicioSeleccionado',
+    servicio.nombre
+  )
+}
+
+function irAContacto() {
+  router.push('/contacto')
 }
 </script>
 
@@ -118,10 +130,12 @@ function seleccionarServicio(servicio) {
 
       <p>
         Has seleccionado:
-        <strong>
-          {{ servicioSeleccionado.nombre }}
-        </strong>
+        <strong>{{ servicioSeleccionado.nombre }}</strong>
       </p>
+
+      <button @click="irAContacto">
+        Continuar al formulario
+      </button>
     </section>
 
     <div

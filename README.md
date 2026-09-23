@@ -70,3 +70,15 @@ Se utilizaron condicionales con v-if y v-else para mostrar la disponibilidad de 
 Cada servicio disponible incorpora el botón "Solicitar información". Esta acción se origina en el componente hijo `TarjetaServicio.vue` y se comunica mediante emit al componente padre `ServiciosView.vue`.
 
 El servicio seleccionado queda almacenado y visible para el usuario.
+
+### Parte 5 – Formulario de contacto
+
+Se implementó un formulario de contacto para permitir que los usuarios soliciten información sobre los servicios de TechNova.
+
+El formulario contiene los campos nombre, correo electrónico, teléfono, servicio de interés y mensaje. Todos los campos se encuentran vinculados mediante v-model.
+
+Antes de procesar la solicitud se valida que los campos obligatorios estén completos y que el correo electrónico tenga un formato válido. Cuando existe un error se muestra un mensaje al usuario.
+
+Cuando los datos son válidos, se presenta una confirmación junto con un resumen de la información ingresada.
+
+El formulario también se relaciona con el catálogo de servicios. Cuando el usuario selecciona un servicio mediante el botón "Solicitar información", la selección se almacena temporalmente y puede utilizarse automáticamente como servicio de interés en la vista Contacto.
