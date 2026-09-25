@@ -160,3 +160,19 @@ Cada servicio contiene la siguiente información:
 Los servicios fueron adaptados al rubro tecnológico de TechNova y corresponden a mantenimiento de computadores, instalación de software, soporte técnico, configuración de redes, respaldo de información y asesoría tecnológica.
 
 Al final del archivo se utiliza `module.exports = servicios`, lo que permite exportar el arreglo de servicios para posteriormente importarlo y utilizarlo desde `server.js`.
+
+### Parte 6 – API de servicios
+
+Se modificó el archivo `server.js` para importar los datos almacenados en `data/servicios.js`.
+
+Para importar el arreglo se utiliza:
+
+`const servicios = require('./data/servicios')`
+
+Posteriormente se creó la ruta GET `/api/servicios`, la cual devuelve todos los servicios de TechNova en formato JSON.
+
+Para enviar los datos se utiliza `res.json(servicios)`.
+
+La diferencia entre `res.send()` y `res.json()` es que `res.send()` permite enviar distintos tipos de respuesta, como texto, mientras que `res.json()` se utiliza específicamente para enviar información en formato JSON.
+
+La API fue probada mediante la dirección `http://localhost:3000/api/servicios`, obteniendo correctamente los seis servicios registrados.
