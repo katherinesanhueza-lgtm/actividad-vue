@@ -121,3 +121,23 @@ Posteriormente se instaló Express.js mediante el comando:
 Express.js se utilizará para crear el servidor web, definir las rutas y construir la API de servicios de TechNova.
 
 Después de la instalación se generó también el archivo `package-lock.json` y la carpeta `node_modules`, donde se encuentran las dependencias instaladas para el backend.
+
+### Parte 3 y 4 – Primer servidor
+
+Se creó el archivo `server.js` dentro de la carpeta backend para implementar el primer servidor de TechNova utilizando Express.js.
+
+Para iniciar el servidor se utilizó el comando:
+
+`node server.js`
+
+El servidor se ejecuta en el puerto 3000 y puede ser consultado mediante `http://localhost:3000`.
+
+En el código se utiliza `app.get()` para definir una ruta que responde a solicitudes HTTP GET.
+
+El parámetro `req` representa la solicitud recibida por el servidor, mientras que `res` representa la respuesta que el servidor enviará al cliente.
+
+Mediante `res.send()` se envía el mensaje de respuesta al navegador.
+
+Finalmente, `app.listen()` inicia el servidor y permite que permanezca escuchando solicitudes en el puerto definido.
+
+Se comprobó correctamente la ruta principal `/`, obteniendo como respuesta el mensaje "Servidor de TechNova funcionando correctamente".
