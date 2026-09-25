@@ -141,3 +141,22 @@ Mediante `res.send()` se envía el mensaje de respuesta al navegador.
 Finalmente, `app.listen()` inicia el servidor y permite que permanezca escuchando solicitudes en el puerto definido.
 
 Se comprobó correctamente la ruta principal `/`, obteniendo como respuesta el mensaje "Servidor de TechNova funcionando correctamente".
+
+### Parte 5 – Datos de servicios
+
+Se creó la carpeta `data` dentro del backend y en ella el archivo `servicios.js`.
+
+Este archivo contiene los datos correspondientes a los servicios ofrecidos por TechNova Servicios Informáticos.
+
+Cada servicio contiene la siguiente información:
+
+- ID
+- Nombre
+- Categoría
+- Descripción
+- Precio
+- Disponibilidad
+
+Los servicios fueron adaptados al rubro tecnológico de TechNova y corresponden a mantenimiento de computadores, instalación de software, soporte técnico, configuración de redes, respaldo de información y asesoría tecnológica.
+
+Al final del archivo se utiliza `module.exports = servicios`, lo que permite exportar el arreglo de servicios para posteriormente importarlo y utilizarlo desde `server.js`.
