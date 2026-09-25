@@ -98,3 +98,26 @@ También se incorporaron ajustes responsive para la navegación, los filtros y e
 Durante la revisión final se probaron las rutas Inicio, Nosotros, Servicios y Contacto, además de la búsqueda, filtros, selección de servicios, validaciones y confirmación del formulario.
 
 Finalmente, se verificó el funcionamiento general de la aplicación y se revisó la consola del navegador para detectar posibles errores.
+
+Actividad 9 – Primer Backend con Express.js
+
+**Empresa:** TechNova Servicios Informáticos  
+**Rubro:** Servicios tecnológicos y soporte informático.
+
+### Parte 1 y 2 – Preparación del backend
+
+Para comenzar el desarrollo del backend se creó una carpeta independiente llamada `backend` dentro del proyecto utilizado en la Actividad 8.
+
+Dentro de esta carpeta se inicializó un proyecto de Node.js mediante el comando:
+
+`npm init -y`
+
+Este comando creó el archivo `package.json`, el cual contiene la información del proyecto y permite registrar las dependencias utilizadas por el backend.
+
+Posteriormente se instaló Express.js mediante el comando:
+
+`npm install express`
+
+Express.js se utilizará para crear el servidor web, definir las rutas y construir la API de servicios de TechNova.
+
+Después de la instalación se generó también el archivo `package-lock.json` y la carpeta `node_modules`, donde se encuentran las dependencias instaladas para el backend.
