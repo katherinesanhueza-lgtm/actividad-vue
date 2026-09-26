@@ -176,3 +176,20 @@ Para enviar los datos se utiliza `res.json(servicios)`.
 La diferencia entre `res.send()` y `res.json()` es que `res.send()` permite enviar distintos tipos de respuesta, como texto, mientras que `res.json()` se utiliza específicamente para enviar información en formato JSON.
 
 La API fue probada mediante la dirección `http://localhost:3000/api/servicios`, obteniendo correctamente los seis servicios registrados.
+
+
+### Parte 7 – Consulta por ID
+
+Se agregó una nueva ruta GET que permite consultar individualmente los servicios de TechNova utilizando su ID.
+
+La ruta implementada es `/api/servicios/:id`.
+
+`req.params` permite acceder a los parámetros incluidos directamente en la URL. En este caso, `req.params.id` obtiene el identificador ingresado después de `/api/servicios/`.
+
+Como los parámetros de la URL son recibidos como texto, se utiliza `Number()` para convertir el ID a un valor numérico y poder compararlo correctamente con los identificadores almacenados en el arreglo de servicios.
+
+Para localizar el servicio se utiliza el método `find()`.
+
+Si el servicio existe, el servidor devuelve sus datos en formato JSON. Si no existe, responde con el código HTTP 404 y el mensaje "Servicio no encontrado".
+
+Se probaron correctamente los servicios con ID 1 e ID 3. También se realizó una consulta utilizando el ID 999 para comprobar la respuesta correspondiente a un servicio inexistente.
