@@ -225,3 +225,66 @@ En este caso, `express.json()` permite que Express pueda interpretar cuerpos de 
 Aunque en esta actividad todavía no se implementan rutas para crear o modificar servicios, este middleware dejará preparado el backend para futuras operaciones mediante métodos como POST y PUT.
 
 La incorporación de este middleware no modifica el funcionamiento de las rutas GET desarrolladas anteriormente.
+
+
+### Parte 12 – Pruebas finales
+
+Antes de finalizar el backend se realizaron diferentes pruebas para comprobar el funcionamiento de las rutas y consultas implementadas.
+
+**Prueba 1 – Inicio del servidor**
+
+Se ejecutó `node server.js` y el servidor inició correctamente en el puerto 3000.
+
+**Prueba 2 – Ruta principal**
+
+Se consultó la ruta `/` y se obtuvo correctamente el mensaje "Servidor de TechNova funcionando correctamente".
+
+**Prueba 3 – Consulta de todos los servicios**
+
+Se consultó `/api/servicios` y la API devolvió correctamente los ocho servicios registrados en formato JSON.
+
+**Prueba 4 – Consulta de servicio existente**
+
+Se consultó `/api/servicios/1` y se obtuvo correctamente el servicio "Mantenimiento de computadores".
+
+**Prueba 5 – Consulta de servicio inexistente**
+
+Se consultó `/api/servicios/999` y el servidor respondió con estado HTTP 404 y el mensaje "Servicio no encontrado".
+
+**Prueba 6 – Filtro por categoría**
+
+Se consultó `/api/servicios?categoria=Seguridad` y se obtuvieron solamente los servicios correspondientes a dicha categoría.
+
+**Prueba 7 – Categoría inexistente**
+
+Se realizó una consulta utilizando una categoría inexistente y la API devolvió un arreglo vacío sin detener el servidor.
+
+Durante las pruebas la consola de Node.js no presentó errores que impidieran utilizar la aplicación.
+
+### Instrucciones para ejecutar el backend
+
+Para ejecutar el backend se debe ingresar desde una terminal a la carpeta `backend`:
+
+`cd backend`
+
+Luego se deben instalar las dependencias, en caso de ser necesario:
+
+`npm install`
+
+Finalmente se inicia el servidor mediante:
+
+`node server.js`
+
+El servidor quedará disponible en el puerto 3000.
+
+La ruta principal puede consultarse en `http://localhost:3000` y la API de servicios mediante `http://localhost:3000/api/servicios`.
+
+### Reflexión final
+
+El desarrollo de esta actividad permitió incorporar un backend al proyecto de TechNova utilizando Node.js y Express.js.
+
+A través de la actividad se aprendió a crear un servidor, definir rutas GET, trabajar con parámetros de ruta y query parameters, enviar respuestas en formato JSON y utilizar códigos de estado HTTP.
+
+También se comprendió la importancia de separar los datos y la lógica del servidor en archivos diferentes y preparar Express para recibir información JSON mediante middleware.
+
+Este backend constituye la base para posteriormente conectar la aplicación desarrollada en Vue con la API de servicios.

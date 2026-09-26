@@ -46,6 +46,22 @@ const servicios = [
     descripcion: 'Orientación para seleccionar equipos, programas y soluciones tecnológicas según las necesidades del cliente.',
     precio: 30000,
     disponible: true
+  },
+  {
+    id: 7,
+    nombre: 'Optimización de computadores',
+    categoria: 'Mantenimiento',
+    descripcion: 'Optimización del sistema para mejorar el rendimiento y reducir problemas de lentitud.',
+    precio: 18000,
+    disponible: true
+  },
+  {
+    id: 8,
+    nombre: 'Configuración de seguridad informática',
+    categoria: 'Seguridad',
+    descripcion: 'Configuración básica de medidas de seguridad para proteger equipos e información.',
+    precio: 40000,
+    disponible: true
   }
 ]
 
