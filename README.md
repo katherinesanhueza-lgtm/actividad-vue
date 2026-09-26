@@ -193,3 +193,23 @@ Para localizar el servicio se utiliza el método `find()`.
 Si el servicio existe, el servidor devuelve sus datos en formato JSON. Si no existe, responde con el código HTTP 404 y el mensaje "Servicio no encontrado".
 
 Se probaron correctamente los servicios con ID 1 e ID 3. También se realizó una consulta utilizando el ID 999 para comprobar la respuesta correspondiente a un servicio inexistente.
+
+### Parte 8 – Filtro por categoría
+
+Se modificó la ruta GET `/api/servicios` para permitir filtrar los servicios de TechNova según su categoría.
+
+El filtro utiliza `req.query.categoria` para obtener la categoría enviada mediante un query parameter en la URL.
+
+Por ejemplo:
+
+`/api/servicios?categoria=Soporte`
+
+Si se proporciona una categoría, se utiliza el método `filter()` para obtener solamente los servicios que pertenecen a ella.
+
+La comparación se realiza utilizando `toLowerCase()`, permitiendo que el filtro no dependa del uso de mayúsculas o minúsculas.
+
+Si no se proporciona ninguna categoría, la ruta `/api/servicios` continúa devolviendo todos los servicios disponibles.
+
+La diferencia entre `req.params` y `req.query` es que `req.params` permite obtener parámetros que forman parte de la ruta, como el ID en `/api/servicios/1`, mientras que `req.query` permite obtener parámetros opcionales enviados después del signo `?`, como la categoría en `/api/servicios?categoria=Soporte`.
+
+También se comprobó que una categoría inexistente devuelve un arreglo vacío sin provocar errores en el servidor.
