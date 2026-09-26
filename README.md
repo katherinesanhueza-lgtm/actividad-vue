@@ -213,3 +213,15 @@ Si no se proporciona ninguna categoría, la ruta `/api/servicios` continúa devo
 La diferencia entre `req.params` y `req.query` es que `req.params` permite obtener parámetros que forman parte de la ruta, como el ID en `/api/servicios/1`, mientras que `req.query` permite obtener parámetros opcionales enviados después del signo `?`, como la categoría en `/api/servicios?categoria=Soporte`.
 
 También se comprobó que una categoría inexistente devuelve un arreglo vacío sin provocar errores en el servidor.
+
+### Parte 9 – Middleware JSON
+
+Se agregó el middleware `express.json()` al servidor de TechNova.
+
+Un middleware permite procesar información durante el flujo de una solicitud antes de que esta llegue a las rutas correspondientes.
+
+En este caso, `express.json()` permite que Express pueda interpretar cuerpos de solicitudes enviados en formato JSON.
+
+Aunque en esta actividad todavía no se implementan rutas para crear o modificar servicios, este middleware dejará preparado el backend para futuras operaciones mediante métodos como POST y PUT.
+
+La incorporación de este middleware no modifica el funcionamiento de las rutas GET desarrolladas anteriormente.
