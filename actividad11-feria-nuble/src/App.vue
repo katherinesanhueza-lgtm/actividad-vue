@@ -52,11 +52,12 @@ function cerrarModal() {
           Actividad N° 11 · Vue.js
         </p>
 
-        <h1>Feria Artesanal de Ñuble</h1>
+        <h1>Sabores y Artesanías de Ñuble</h1>
 
         <p class="hero__text">
-          Explora productos elaborados por emprendedores locales y practica
-          v-model, v-if, v-else, v-show y v-for en una interfaz completa.
+          Descubre productos únicos elaborados por emprendedores y artesanos
+  de la Región de Ñuble, destacando sus sabores, tradiciones y el
+  talento local.
         </p>
       </div>
     </section>
@@ -142,7 +143,20 @@ function cerrarModal() {
         />
       </div>
     </section>
+<div
+  v-if="!mostrarCatalogo"
+  class="catalogo-oculto"
+>
+  <span class="catalogo-oculto__icon">🧺</span>
 
+  <div>
+    <strong>El catálogo está oculto</strong>
+    <p>
+      Presiona “Mostrar catálogo” para volver a explorar
+      los productos de nuestros emprendedores de Ñuble.
+    </p>
+  </div>
+</div>
     <ProductoModal
       :producto="seleccionado"
       :visible="modalVisible"
@@ -273,7 +287,33 @@ function cerrarModal() {
   background: white;
   color: #475569;
 }
+.catalogo-oculto {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  margin-top: 18px;
+  border: 1px dashed #94a3b8;
+  border-radius: 16px;
+  background: white;
+  color: #475569;
+}
 
+.catalogo-oculto__icon {
+  font-size: 2.5rem;
+}
+
+.catalogo-oculto strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1e293b;
+  font-size: 1.05rem;
+}
+
+.catalogo-oculto p {
+  margin: 0;
+  line-height: 1.5;
+}
 .footer {
   margin-top: 30px;
   padding-top: 18px;

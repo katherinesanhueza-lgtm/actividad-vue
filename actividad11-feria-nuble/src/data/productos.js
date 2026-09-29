@@ -1,6 +1,7 @@
 import imgQueso from '../assets/img/quesos-chillan.jpg'
 import imgMiel from '../assets/img/miel-chillan.jpg'
 import imgTejidos from '../assets/img/tejidos-chillan.jpg'
+import imgCeramica from '../assets/img/ceramica-quinchamali.jpg'
 
 export const productos = [
   {
@@ -29,5 +30,14 @@ export const productos = [
     imagen: imgTejidos,
     descripcion:
       'Poncho de lana natural, tejido a telar por artesanas de la zona.'
+  },
+  {
+    id: 4,
+    nombre: 'Cerámica artesanal de Quinchamalí',
+    precio: 12000,
+    categoria: 'Artesanía',
+    imagen: imgCeramica,
+    descripcion:
+      'Pieza de cerámica artesanal inspirada en la tradición de Quinchamalí, Región de Ñuble.'
   }
 ]
