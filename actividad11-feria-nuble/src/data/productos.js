@@ -9,6 +9,7 @@ export const productos = [
     nombre: 'Queso Chanco de San Carlos',
     precio: 4500,
     categoria: 'Lácteos',
+    comuna: 'San Carlos',
     imagen: imgQueso,
     descripcion:
       'Queso artesanal de vaca, maduración media, tradicional de Ñuble.'
@@ -18,6 +19,7 @@ export const productos = [
     nombre: 'Miel de Quillón',
     precio: 3500,
     categoria: 'Miel',
+    comuna: 'Quillón',
     imagen: imgMiel,
     descripcion:
       'Miel multifloral de productores locales, sin aditivos.'
@@ -27,6 +29,7 @@ export const productos = [
     nombre: 'Poncho tejido de Coihueco',
     precio: 22000,
     categoria: 'Textil',
+    comuna: 'Coihueco',
     imagen: imgTejidos,
     descripcion:
       'Poncho de lana natural, tejido a telar por artesanas de la zona.'
@@ -36,6 +39,7 @@ export const productos = [
     nombre: 'Cerámica artesanal de Quinchamalí',
     precio: 12000,
     categoria: 'Artesanía',
+    comuna: 'Chillán',
     imagen: imgCeramica,
     descripcion:
       'Pieza de cerámica artesanal inspirada en la tradición de Quinchamalí, Región de Ñuble.'

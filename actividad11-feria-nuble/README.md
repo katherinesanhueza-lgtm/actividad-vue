@@ -142,3 +142,173 @@ Instalar las dependencias:
 
 ```bash
 npm install
+
+
+
+---
+
+# Actividad 12 - Vue Router y Favoritos
+
+## Descripción
+
+En esta actividad se transformó el proyecto Feria Artesanal de Ñuble desarrollado anteriormente en una aplicación SPA (Single Page Application) utilizando Vue Router.
+
+La aplicación permite navegar entre diferentes vistas sin recargar completamente la página, consultar el catálogo de productos, visualizar el detalle de cada producto mediante rutas dinámicas, guardar productos favoritos, utilizar un formulario de contacto y mostrar una página 404 cuando una ruta no existe.
+
+## Funcionalidades
+
+- Navegación mediante Vue Router.
+- Navegación interna utilizando RouterLink.
+- Vista de Inicio.
+- Vista de Productos.
+- Vista de Favoritos.
+- Vista de Contacto.
+- Página 404.
+- Ruta dinámica para visualizar el detalle de cada producto.
+- Búsqueda de productos por nombre.
+- Filtro de productos por categoría.
+- Favoritos persistentes mediante localStorage.
+- Eliminación de productos desde la vista de favoritos.
+- Formulario de contacto con validación de campos.
+- Componentes reutilizables.
+- Uso de props y emit.
+- Diseño responsive.
+
+## Rutas
+
+- `/` - Vista de Inicio.
+- `/productos` - Catálogo de productos.
+- `/productos/:id` - Detalle dinámico de un producto.
+- `/favoritos` - Productos seleccionados como favoritos.
+- `/contacto` - Formulario de contacto.
+- Cualquier ruta inexistente muestra la página 404.
+
+## Componentes principales
+
+### Navbar.vue
+
+Contiene el menú principal de navegación de la aplicación.
+
+Utiliza `RouterLink` para navegar entre Inicio, Productos, Favoritos y Contacto sin recargar completamente el sitio.
+
+### ProductoCard.vue
+
+Componente reutilizable encargado de mostrar la información resumida de cada producto.
+
+Recibe mediante `props`:
+
+- Producto.
+- Estado de favorito.
+
+Permite:
+
+- Acceder al detalle del producto.
+- Agregar o quitar el producto de favoritos.
+
+Utiliza `emit` para comunicar al componente padre cuando cambia el estado de favorito.
+
+## Vistas
+
+### InicioView.vue
+
+Corresponde a la página inicial de la aplicación y contiene un acceso directo al catálogo.
+
+### ProductosView.vue
+
+Muestra el catálogo completo de productos.
+
+Incluye:
+
+- Buscador por nombre.
+- Filtro por categoría.
+- Filtro por comuna.
+- Productos generados dinámicamente.
+- Administración de favoritos.
+
+### ProductoDetalleView.vue
+
+Utiliza una ruta dinámica para obtener el ID del producto desde la URL.
+
+Por ejemplo:
+
+`/productos/2`
+
+permite buscar y mostrar el producto cuyo ID corresponde a 2.
+
+Si el producto no existe, se muestra un mensaje indicando que no fue encontrado.
+
+### FavoritosView.vue
+
+Recupera desde `localStorage` los productos marcados como favoritos y muestra solamente esos productos.
+
+También permite quitar productos de favoritos.
+
+### ContactoView.vue
+
+Contiene un formulario con:
+
+- Nombre.
+- Correo electrónico.
+- Mensaje.
+
+Utiliza `v-model` y valida que todos los campos estén completos antes de registrar el mensaje.
+
+### NotFoundView.vue
+
+Muestra una página de error 404 cuando el usuario intenta acceder a una dirección que no existe.
+
+## Persistencia con localStorage
+
+Los ID de los productos favoritos se almacenan en el navegador utilizando `localStorage`.
+
+Antes de guardar el arreglo se utiliza `JSON.stringify()` y al recuperar la información se utiliza `JSON.parse()`.
+
+Esto permite conservar los favoritos incluso después de actualizar la página.
+
+## Desafío individual
+
+Como mejora individual se agregó un filtro por comuna en la vista de productos.
+
+### Archivo modificado
+
+`src/views/ProductosView.vue`
+
+### Comportamiento agregado
+
+Se incorporó un nuevo selector que permite filtrar los productos según su comuna.
+
+Las comunas se obtienen automáticamente a partir de los productos registrados utilizando una propiedad `computed`.
+
+Actualmente se pueden filtrar productos de:
+
+- San Carlos.
+- Quillón.
+- Coihueco.
+- Chillán.
+
+El filtro por comuna funciona de manera conjunta con el buscador por nombre y el filtro por categoría.
+
+### Verificación
+
+Se comprobó que al seleccionar una comuna se muestran solamente los productos correspondientes a esa ubicación.
+
+También se verificó el funcionamiento combinado entre búsqueda, categoría y comuna.
+
+## Tecnologías utilizadas
+
+- Vue 3
+- Vite
+- Vue Router
+- JavaScript
+- HTML
+- CSS
+- localStorage
+- Git
+- GitHub
+
+## Ejecutar el proyecto
+
+Instalar dependencias:
+
+```bash
+npm install
