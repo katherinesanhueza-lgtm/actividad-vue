@@ -1,63 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import ServicioCard from '../components/ServicioCard.vue'
-
-const servicios = [
-  {
-    id: 1,
-    nombre: 'Desarrollo de sitios web',
-    categoria: 'Tecnología',
-    descripcion:
-      'Creación de sitios web modernos y adaptables para emprendimientos y pequeñas empresas.',
-    precio: 250000,
-    disponible: true
-  },
-  {
-    id: 2,
-    nombre: 'Asesoría contable',
-    categoria: 'Finanzas',
-    descripcion:
-      'Orientación contable y tributaria para trabajadores independientes y pequeñas empresas.',
-    precio: 45000,
-    disponible: true
-  },
-  {
-    id: 3,
-    nombre: 'Diseño gráfico',
-    categoria: 'Diseño',
-    descripcion:
-      'Diseño de logotipos, piezas gráficas y material visual para negocios y emprendimientos.',
-    precio: 60000,
-    disponible: true
-  },
-  {
-    id: 4,
-    nombre: 'Fotografía profesional',
-    categoria: 'Fotografía',
-    descripcion:
-      'Sesiones fotográficas profesionales para productos, eventos y emprendimientos.',
-    precio: 80000,
-    disponible: false
-  },
-  {
-    id: 5,
-    nombre: 'Asesoría nutricional',
-    categoria: 'Bienestar',
-    descripcion:
-      'Orientación nutricional personalizada enfocada en hábitos alimentarios y bienestar.',
-    precio: 35000,
-    disponible: true
-  },
-  {
-    id: 6,
-    nombre: 'Clases particulares de matemáticas',
-    categoria: 'Educación',
-    descripcion:
-      'Clases de apoyo y reforzamiento de matemáticas para estudiantes de enseñanza básica y media.',
-    precio: 18000,
-    disponible: true
-  }
-]
+import { servicios } from '../data/servicios'
 
 const busqueda = ref('')
 const categoriaSeleccionada = ref('Todas')
@@ -109,7 +53,6 @@ const serviciosFiltrados = computed(() => {
       </p>
     </div>
 
-    <!-- BUSCADOR Y FILTRO -->
     <div class="filtros">
 
       <div class="campo campo-busqueda">
@@ -146,14 +89,12 @@ const serviciosFiltrados = computed(() => {
 
     </div>
 
-    <!-- CANTIDAD DE RESULTADOS -->
     <div class="resultados">
       <p>
         {{ serviciosFiltrados.length }} servicio(s) encontrado(s)
       </p>
     </div>
 
-    <!-- CATÁLOGO -->
     <div
       v-if="serviciosFiltrados.length > 0"
       class="servicios-grid"
@@ -165,7 +106,6 @@ const serviciosFiltrados = computed(() => {
       />
     </div>
 
-    <!-- SIN RESULTADOS -->
     <div
       v-else
       class="sin-resultados"
@@ -204,8 +144,6 @@ const serviciosFiltrados = computed(() => {
   color: #64748b;
   line-height: 1.6;
 }
-
-/* FILTROS */
 
 .filtros {
   display: flex;
@@ -260,16 +198,12 @@ const serviciosFiltrados = computed(() => {
   margin: 0;
 }
 
-/* CATÁLOGO */
-
 .servicios-grid {
   display: grid;
   grid-template-columns:
     repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
-
-/* SIN RESULTADOS */
 
 .sin-resultados {
   padding: 40px 20px;
