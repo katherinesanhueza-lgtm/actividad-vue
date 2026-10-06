@@ -5,8 +5,17 @@ const props = defineProps({
   servicio: {
     type: Object,
     required: true
+  },
+
+  favorito: {
+    type: Boolean,
+    default: false
   }
 })
+
+const emit = defineEmits([
+  'cambiar-favorito'
+])
 
 const precioCLP = computed(() => {
   return new Intl.NumberFormat('es-CL', {
@@ -15,6 +24,10 @@ const precioCLP = computed(() => {
     maximumFractionDigits: 0
   }).format(props.servicio.precio)
 })
+
+function cambiarFavorito() {
+  emit('cambiar-favorito', props.servicio.id)
+}
 </script>
 
 <template>
@@ -52,12 +65,25 @@ const precioCLP = computed(() => {
         No disponible
       </p>
 
-      <RouterLink
-        :to="`/servicios/${servicio.id}`"
-        class="boton-detalle"
-      >
-        Ver detalle
-      </RouterLink>
+      <div class="acciones">
+
+        <RouterLink
+          :to="`/servicios/${servicio.id}`"
+          class="boton-detalle"
+        >
+          Ver detalle
+        </RouterLink>
+
+        <button
+          type="button"
+          class="boton-favorito"
+          :class="{ activo: favorito }"
+          @click="cambiarFavorito"
+        >
+          {{ favorito ? '★ Quitar favorito' : '☆ Agregar favorito' }}
+        </button>
+
+      </div>
 
     </div>
 
@@ -126,19 +152,44 @@ const precioCLP = computed(() => {
   font-weight: 700;
 }
 
-.boton-detalle {
-  display: block;
+.acciones {
+  display: grid;
+  gap: 9px;
   margin-top: 12px;
+}
+
+.boton-detalle,
+.boton-favorito {
+  width: 100%;
   padding: 10px 14px;
   border-radius: 9px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.boton-detalle {
   background: #1e3a5f;
   color: white;
-  text-align: center;
   text-decoration: none;
-  font-weight: 700;
 }
 
 .boton-detalle:hover {
   background: #2b527d;
+}
+
+.boton-favorito {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #1e3a5f;
+}
+
+.boton-favorito:hover {
+  background: #f8fafc;
+}
+
+.boton-favorito.activo {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  color: #b45309;
 }
 </style>

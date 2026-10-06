@@ -6,6 +6,8 @@ import { servicios } from '../data/servicios'
 const busqueda = ref('')
 const categoriaSeleccionada = ref('Todas')
 
+const favoritos = ref([])
+
 const categorias = computed(() => {
   return [
     'Todas',
@@ -33,6 +35,20 @@ const serviciosFiltrados = computed(() => {
     return coincideNombre && coincideCategoria
   })
 })
+
+function cambiarFavorito(id) {
+  if (favoritos.value.includes(id)) {
+
+    favoritos.value = favoritos.value.filter(
+      favoritoId => favoritoId !== id
+    )
+
+  } else {
+
+    favoritos.value.push(id)
+
+  }
+}
 </script>
 
 <template>
@@ -103,6 +119,8 @@ const serviciosFiltrados = computed(() => {
         v-for="servicio in serviciosFiltrados"
         :key="servicio.id"
         :servicio="servicio"
+        :favorito="favoritos.includes(servicio.id)"
+        @cambiar-favorito="cambiarFavorito"
       />
     </div>
 
@@ -110,7 +128,9 @@ const serviciosFiltrados = computed(() => {
       v-else
       class="sin-resultados"
     >
-      <h2>No se encontraron servicios</h2>
+      <h2>
+        No se encontraron servicios
+      </h2>
 
       <p>
         No se encontraron servicios para los criterios seleccionados.
