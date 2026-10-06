@@ -1,11 +1,10 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import ServicioCard from '../components/ServicioCard.vue'
 import { servicios } from '../data/servicios'
 
 const busqueda = ref('')
 const categoriaSeleccionada = ref('Todas')
-
 const favoritos = ref([])
 
 const categorias = computed(() => {
@@ -38,17 +37,26 @@ const serviciosFiltrados = computed(() => {
 
 function cambiarFavorito(id) {
   if (favoritos.value.includes(id)) {
-
     favoritos.value = favoritos.value.filter(
       favoritoId => favoritoId !== id
     )
-
   } else {
-
     favoritos.value.push(id)
-
   }
+
+  localStorage.setItem(
+    'favoritos',
+    JSON.stringify(favoritos.value)
+  )
 }
+
+onMounted(() => {
+  const guardados = localStorage.getItem('favoritos')
+
+  if (guardados) {
+    favoritos.value = JSON.parse(guardados)
+  }
+})
 </script>
 
 <template>
