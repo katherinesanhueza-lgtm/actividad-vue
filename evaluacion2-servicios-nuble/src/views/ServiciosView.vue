@@ -1,17 +1,24 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import ServicioCard from '../components/ServicioCard.vue'
-import { servicios } from '../data/servicios'
+import { obtenerServicios } from '../services/serviciosService'
+
+const servicios = ref([])
 
 const busqueda = ref('')
 const categoriaSeleccionada = ref('Todas')
 const favoritos = ref([])
 
+const cargando = ref(true)
+const error = ref('')
+
 const categorias = computed(() => {
   return [
     'Todas',
     ...new Set(
-      servicios.map(servicio => servicio.categoria)
+      servicios.value.map(
+        servicio => servicio.categoria
+      )
     )
   ]
 })
@@ -21,7 +28,7 @@ const serviciosFiltrados = computed(() => {
     .trim()
     .toLowerCase()
 
-  return servicios.filter(servicio => {
+  return servicios.value.filter(servicio => {
     const coincideNombre =
       servicio.nombre
         .toLowerCase()
@@ -34,6 +41,20 @@ const serviciosFiltrados = computed(() => {
     return coincideNombre && coincideCategoria
   })
 })
+
+async function cargarServicios() {
+  cargando.value = true
+  error.value = ''
+
+  try {
+    servicios.value = await obtenerServicios()
+  } catch (err) {
+    error.value =
+      'Ocurrió un error al cargar los servicios.'
+  } finally {
+    cargando.value = false
+  }
+}
 
 function cambiarFavorito(id) {
   if (favoritos.value.includes(id)) {
@@ -51,11 +72,14 @@ function cambiarFavorito(id) {
 }
 
 onMounted(() => {
-  const guardados = localStorage.getItem('favoritos')
+  const guardados =
+    localStorage.getItem('favoritos')
 
   if (guardados) {
     favoritos.value = JSON.parse(guardados)
   }
+
+  cargarServicios()
 })
 </script>
 
@@ -77,73 +101,107 @@ onMounted(() => {
       </p>
     </div>
 
-    <div class="filtros">
+    <!-- CARGANDO -->
+    <div
+      v-if="cargando"
+      class="estado"
+    >
+      <h2>Cargando servicios...</h2>
+      <p>Espera un momento mientras obtenemos la información.</p>
+    </div>
 
-      <div class="campo campo-busqueda">
-        <label for="buscar">
-          Buscar servicio
-        </label>
+    <!-- ERROR -->
+    <div
+      v-else-if="error"
+      class="estado estado-error"
+    >
+      <h2>Error al cargar</h2>
 
-        <input
-          id="buscar"
-          v-model="busqueda"
-          type="search"
-          placeholder="Ej.: diseño, asesoría, fotografía..."
+      <p>
+        {{ error }}
+      </p>
+
+      <button
+        type="button"
+        class="boton-reintentar"
+        @click="cargarServicios"
+      >
+        Intentar nuevamente
+      </button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <template v-else>
+
+      <div class="filtros">
+
+        <div class="campo campo-busqueda">
+          <label for="buscar">
+            Buscar servicio
+          </label>
+
+          <input
+            id="buscar"
+            v-model="busqueda"
+            type="search"
+            placeholder="Ej.: diseño, asesoría, fotografía..."
+          />
+        </div>
+
+        <div class="campo">
+          <label for="categoria">
+            Categoría
+          </label>
+
+          <select
+            id="categoria"
+            v-model="categoriaSeleccionada"
+          >
+            <option
+              v-for="categoria in categorias"
+              :key="categoria"
+              :value="categoria"
+            >
+              {{ categoria }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="resultados">
+        <p>
+          {{ serviciosFiltrados.length }} servicio(s) encontrado(s)
+        </p>
+      </div>
+
+      <div
+        v-if="serviciosFiltrados.length > 0"
+        class="servicios-grid"
+      >
+        <ServicioCard
+          v-for="servicio in serviciosFiltrados"
+          :key="servicio.id"
+          :servicio="servicio"
+          :favorito="favoritos.includes(servicio.id)"
+          @cambiar-favorito="cambiarFavorito"
         />
       </div>
 
-      <div class="campo">
-        <label for="categoria">
-          Categoría
-        </label>
+      <div
+        v-else
+        class="sin-resultados"
+      >
+        <h2>
+          No se encontraron servicios
+        </h2>
 
-        <select
-          id="categoria"
-          v-model="categoriaSeleccionada"
-        >
-          <option
-            v-for="categoria in categorias"
-            :key="categoria"
-            :value="categoria"
-          >
-            {{ categoria }}
-          </option>
-        </select>
+        <p>
+          No se encontraron servicios para los criterios seleccionados.
+        </p>
       </div>
 
-    </div>
-
-    <div class="resultados">
-      <p>
-        {{ serviciosFiltrados.length }} servicio(s) encontrado(s)
-      </p>
-    </div>
-
-    <div
-      v-if="serviciosFiltrados.length > 0"
-      class="servicios-grid"
-    >
-      <ServicioCard
-        v-for="servicio in serviciosFiltrados"
-        :key="servicio.id"
-        :servicio="servicio"
-        :favorito="favoritos.includes(servicio.id)"
-        @cambiar-favorito="cambiarFavorito"
-      />
-    </div>
-
-    <div
-      v-else
-      class="sin-resultados"
-    >
-      <h2>
-        No se encontraron servicios
-      </h2>
-
-      <p>
-        No se encontraron servicios para los criterios seleccionados.
-      </p>
-    </div>
+    </template>
 
   </section>
 </template>
@@ -233,7 +291,8 @@ onMounted(() => {
   gap: 20px;
 }
 
-.sin-resultados {
+.sin-resultados,
+.estado {
   padding: 40px 20px;
   border: 1px dashed #94a3b8;
   border-radius: 14px;
@@ -242,8 +301,25 @@ onMounted(() => {
   color: #475569;
 }
 
-.sin-resultados h2 {
+.sin-resultados h2,
+.estado h2 {
   margin-top: 0;
   color: #1f2937;
+}
+
+.estado-error {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.boton-reintentar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 9px;
+  background: #1e3a5f;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
 }
 </style>
