@@ -1,4 +1,3 @@
-
 {
   "servicios": [
     {
@@ -22,5 +21,6 @@
       "precio": 75000,
       "descripcion": "Configuración de red local"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
