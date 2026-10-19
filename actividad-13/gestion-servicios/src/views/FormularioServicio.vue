@@ -85,23 +85,30 @@ async function guardarServicio() {
     descripcion: formulario.descripcion.trim()
   }
 
-  try {
-    if (editando) {
-      // Actualizar un servicio existente
-      await actualizarServicio(route.params.id, datos)
-    } else {
-      // Crear un servicio nuevo
-      await crearServicio(datos)
-    }
 
-    // Regresar al listado
-    await router.push('/')
+try {
+  if (editando) {
+    await actualizarServicio(route.params.id, datos)
 
-  } catch (e) {
-    error.value = `No fue posible guardar el servicio: ${e.message}`
-  } finally {
-    guardando.value = false
+    await router.push({
+      path: '/',
+      query: { mensaje: 'actualizado' }
+    })
+  } else {
+    await crearServicio(datos)
+
+    await router.push({
+      path: '/',
+      query: { mensaje: 'creado' }
+    })
   }
+
+} catch (e) {
+  error.value = `No fue posible guardar el servicio: ${e.message}`
+} finally {
+  guardando.value = false
+}
+
 }
 </script>
 

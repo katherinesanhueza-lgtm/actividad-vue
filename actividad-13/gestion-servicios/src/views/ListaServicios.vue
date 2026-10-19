@@ -1,6 +1,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import {
   obtenerServicios,
   eliminarServicio
@@ -17,6 +18,7 @@ const categoriaSeleccionada = ref('Todas')
 const cargando = ref(false)
 const error = ref('')
 const mensaje = ref('')
+const route = useRoute()
 
 // Categorías disponibles
 const categorias = computed(() => {
@@ -82,9 +84,29 @@ async function borrarServicio(id) {
 }
 
 // Cargar datos cuando aparece la vista
-onMounted(() => {
-  cargarServicios()
+
+onMounted(async () => {
+  await cargarServicios()
+
+  if (!error.value) {
+    if (route.query.mensaje === 'creado') {
+      mensaje.value = 'Servicio creado correctamente.'
+    }
+
+    if (route.query.mensaje === 'actualizado') {
+      mensaje.value = 'Servicio actualizado correctamente.'
+    }
+  }
+
+  if (route.query.mensaje) {
+    window.history.replaceState(
+      window.history.state,
+      '',
+      route.path
+    )
+  }
 })
+
 </script>
 
 <template>
